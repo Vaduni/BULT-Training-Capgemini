@@ -1,0 +1,175 @@
+<div
+  class="profile-card"
+
+  [class.edit-mode]="isEditMode"
+
+  [class.profile-complete]="isProfileComplete"
+
+  [class.premium-member]="customer.membershipLevel === 'Premium'"
+
+  [ngClass]="{
+    'vip-customer': customer.loyaltyPoints > 1000,
+    'new-customer': customer.totalOrders < 5,
+    'active-member': customer.isActive
+  }"
+
+  [ngStyle]="{
+    'background-color':
+      customer.membershipLevel === 'Gold'
+      ? '#EDE9E6'
+      : '#BFDDF0',
+
+    'border':
+      '2px solid ' + getMembershipColor(),
+
+    'padding': '20px'
+  }"
+
+  [attr.role]="'form'"
+
+  [attr.data-customer-id]="customer.id"
+>
+
+  <img
+    [src]="customer.profileImageUrl || defaultProfileImage"
+    width="160" height="160"
+    [alt]="customer.firstName + ' ' + customer.lastName"
+  >
+
+  <h2
+    [style.color]="getMembershipColor()"
+
+    [style.font-weight]="isEditMode ? 'bold' : 'normal'"
+  >
+
+    {{ customer.firstName }}
+    {{ customer.lastName }}
+
+  </h2>
+
+  <p>{{ customer.email }}</p>
+
+  <p>{{ customer.membershipLevel }}</p>
+
+  <p>{{ customer.loyaltyPoints }} points</p>
+
+  <p>{{ customer.totalOrders }} Orders</p>
+
+  <p>
+    {{ customer.joinDate | date:'fullDate' }}
+  </p>
+
+  <div *ngIf="customer.isActive" class="status active">
+    Active
+
+  </div>
+
+  <br>
+
+  <input
+    [(ngModel)]="customer.firstName"
+
+    [disabled]="!isEditMode"
+
+    [maxlength]="50"
+
+    [attr.aria-required]="true"
+
+    (blur)="validateField($event)"
+  >
+
+  <br><br>
+
+  <input
+    [(ngModel)]="customer.lastName"
+
+    [disabled]="!isEditMode"
+
+    (blur)="validateField($event)"
+  >
+
+  <br><br>
+
+  <input
+    [(ngModel)]="customer.email"
+
+    [type]="showEmailAsText ? 'text' : 'email'"
+
+    [disabled]="!isEditMode"
+  >
+
+  <br><br>
+
+  <input
+    [(ngModel)]="customer.phone"
+
+    [disabled]="!isEditMode"
+  >
+
+  <br><br>
+
+  <textarea
+    [(ngModel)]="customer.address"
+
+    [disabled]="!isEditMode"
+  >
+  </textarea>
+
+  <br><br>
+
+  <select
+    [(ngModel)]="customer.preferredCategory"
+
+    [disabled]="!isEditMode"
+  >
+
+    @for(category of categories; track category){
+
+      <option [value]="category">
+        {{ category }}
+      </option>
+
+    }
+
+  </select>
+
+  <br><br>
+
+  @if(isEditMode){
+
+    <input
+      type="file"
+      (change)="onPhotoUpload($event)"
+    >
+
+    <br><br>
+
+  }
+
+  @if(!isEditMode){
+
+    <button (click)="toggleEditMode()">
+      Edit Profile
+    </button>
+
+  }
+
+  @if(isEditMode){
+
+    <button
+      (click)="saveProfile()"
+
+      [disabled]="!isFormValid()"
+
+      [class.invalid]="!isFormValid()"
+    >
+      Save
+    </button>
+
+    <button (click)="cancelEdit()">
+      Cancel
+    </button>
+
+  }
+
+</div>

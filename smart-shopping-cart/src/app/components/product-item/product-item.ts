@@ -1,9 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { Product } from '../../models/models';
 
 @Component({
   selector: 'app-product-item',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './product-item.html',
-  styleUrl: './product-item.css',
+  styleUrl: './product-item.css'
 })
-export class ProductItem {}
+export class ProductItemComponent {
+
+  @Input({ required: true })
+  product!: Product;
+
+  @Output('productSelected')
+  addToCartEvent = new EventEmitter<Product>();
+
+  addToCart(){
+
+    this.addToCartEvent.emit(this.product);
+  }
+}

@@ -1,1 +1,31 @@
-<p>shopping-cart works!</p>
+<h2>Shopping Cart Component</h2>
+<app-product-filter
+ [products]="filteredProducts"
+  (filterChanged)="applyFilters($event)"
+>
+</app-product-filter>
+<app-product-list
+ [products]="filteredProducts"
+  (productSelected)="addToCart($event)"
+>
+</app-product-list>
+
+<app-cart-summary
+  [cartData]="cartItems"
+  (removeItemEvent)="removeItem($event)"
+  (warningEvent)="cartWarning.emit($event)"
+>
+</app-cart-summary>
+
+<app-discount-panel
+  [cartTotal]="getSubtotal()"
+  [(discountCode)]="discountCode"
+  (discountApplied)="applyDiscount($event)"
+>
+</app-discount-panel>
+
+<h3>Total After Discount: Rs.{{ totalAfterDiscount() }}</h3>
+
+<button (click)="checkout()">
+  Checkout
+</button>

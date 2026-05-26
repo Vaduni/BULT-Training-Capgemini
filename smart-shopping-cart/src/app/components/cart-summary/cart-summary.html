@@ -1,1 +1,44 @@
-<p>cart-summary works!</p>
+<div class="cart-box">
+
+  <h2>Cart Summary</h2>
+
+  @if(cartItems.length === 0){
+
+    <p>Cart is Empty</p>
+
+  }
+
+  @for(item of cartItems; track item.product.id){
+
+    <div style="margin:15px 0">
+
+      <p>
+        <strong>{{ item.product.name }}</strong>
+      </p>
+
+      <p>
+        Quantity: {{ item.quantity }}
+      </p>
+
+      <p>
+        Price:
+        Rs.{{ item.product.price * item.quantity }}
+      </p>
+
+      <button
+        (click)="removeItemEvent.emit(item.product.id)"
+      >
+        Remove
+      </button>
+
+    </div>
+
+    <hr>
+
+  }
+
+  <div class="total">
+    Subtotal: Rs.{{ getSubtotal() }}
+  </div>
+
+</div>

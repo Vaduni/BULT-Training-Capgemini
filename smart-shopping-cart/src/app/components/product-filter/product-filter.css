@@ -1,0 +1,14 @@
+.filter-panel{
+  background:#767F9E;
+  margin-bottom:20px;
+}
+.button-group{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.clear-visible{
+  background:black;
+}

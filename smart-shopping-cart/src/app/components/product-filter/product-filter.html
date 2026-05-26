@@ -1,0 +1,74 @@
+<div
+  class="filter-panel"
+
+  [class.active-filter]="isFilterActive"
+
+  [class.expanded]="isPanelExpanded"
+
+  [ngClass]="{
+    'highlight': hasResults,
+    'no-results': !hasResults,
+    'loading': isLoading
+  }"
+
+  [style.background-color]="getCategoryColor(activeCategory)"
+
+  [style.width.%]="isPanelExpanded ? 100 : 30"
+
+  [ngStyle]="{
+    'border': isFilterActive ? '2px solid green' : '1px solid gray',
+    'padding': '15px',
+    'border-radius': '10px'
+  }"
+
+  [attr.aria-label]="'Filter products by ' + activeCategory"
+
+  [attr.data-category]="activeCategory"
+
+  [attr.tabindex]="isFilterActive ? 0 : -1"
+>
+
+  <h2>Product Filters</h2>
+
+  <p>Total Products: {{ totalProducts }}</p>
+
+  <p>Search Term: {{ searchTerm }}</p>
+
+  <p>
+    Active Category:
+    {{ activeCategory || 'All Categories' }}
+  </p>
+
+
+  <input
+    type="text"
+
+    [(ngModel)]="searchTerm"
+
+    [placeholder]="searchPlaceholder"
+
+    (input)="onSearchChange($event)"
+  >
+
+  <br><br>
+
+  @for(category of categories; track category){
+
+    <button
+      (click)="selectCategory(category)"
+    >
+      {{ category }}
+    </button>
+
+  }
+  <button
+    [value]="resetButtonText"
+
+    [class.clear-visible]="searchTerm.length > 0"
+
+    (click)="clearAllFilters()"
+  >
+    {{ resetButtonText }}
+  </button>
+
+</div>

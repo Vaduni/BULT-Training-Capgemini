@@ -1,1 +1,16 @@
-<p>discount-panel works!</p>
+<div class="discount-box">
+
+  <h2>Discount Panel</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="discountCode"
+    (ngModelChange)="discountCodeChange.emit($event)"
+    placeholder="Enter Discount Code"
+  />
+
+  <button (click)="applyDiscount()">
+    Apply
+  </button>
+
+</div>
