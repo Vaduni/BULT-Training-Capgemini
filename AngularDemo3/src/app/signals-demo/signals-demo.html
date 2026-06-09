@@ -1,0 +1,39 @@
+<div>
+
+  <p>Signals Demo Works!</p>
+
+  <h2>
+    Counter:
+    {{ counter() }}
+  </h2>
+
+  <button (click)="increment()">
+    Increment
+  </button>
+
+  <p>
+    Double Counter:
+    {{ doubleCounter() }}
+  </p>
+
+  <hr>
+
+  <h3>
+    Pass Signal To Child Component
+  </h3>
+
+  <button (click)="toggleStatus()">
+    Toggle Status
+  </button>
+
+  <p>
+    Status:
+    {{ currentStatus() }}
+  </p>
+
+  <app-signals-consumer
+    [user]="currentUser()"
+    [status]="currentStatus()">
+  </app-signals-consumer>
+
+</div>

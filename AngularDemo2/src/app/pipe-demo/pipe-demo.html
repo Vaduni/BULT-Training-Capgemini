@@ -1,0 +1,174 @@
+<p>demo-pipes works!</p>
+
+<p>Cities without any pipe:</p>
+<ul>
+    @for(city of cities; track $index)
+    {
+        <li>{{city}}</li>
+    }
+</ul>
+
+<p>Cities with UpperCasePipe:</p>
+<ul>
+    @for(city of cities; track $index)
+    {
+        <li>{{city | uppercase}}</li>
+    }
+</ul>
+
+<p>Cities with LowerCasePipe:</p>
+<ul>
+    @for(city of cities; track $index)
+    {
+        <li>{{city | lowercase}}</li>
+    }
+</ul>
+
+<p>Cities with TitleCasePipe:</p>
+<ul>
+    @for(city of cities; track $index)
+    {
+        <li>{{city | titlecase}}</li>
+    }
+</ul>
+
+<p>Employee object without JsonPipe:</p>
+<p>{{Employee}}</p>
+
+<p>Employee object with JsonPipe:</p>
+<p>{{Employee | json}}</p>
+
+<p>KeyValue Pipe for Employee object:</p>
+
+<ul>
+    @for(item of Employee | keyvalue; track $index)
+    {
+        @if(isObject(item.value))
+        {
+            <li>{{item.key}}:</li>
+
+            <ul>
+                @for(subItem of item.value | keyvalue; track $index)
+                {
+                    <li>{{subItem.key}} : {{subItem.value}}</li>
+                }
+            </ul>
+        }
+        @else
+        {
+            <li>{{item.key}} : {{item.value}}</li>
+        }
+    }
+</ul>
+
+<p>Date Pipe</p>
+
+<p>Current Date: {{currentDate}}</p>
+
+<p>Current Date with DatePipe: {{currentDate | date}}</p>
+
+<p>Current Date with DatePipe and format fullDate:
+    {{currentDate | date:'fullDate'}}
+</p>
+
+<p>Current Date with DatePipe and format shortDate:
+    {{currentDate | date:'shortDate'}}
+</p>
+
+<p>Current Date with format MM/dd/yyyy:
+    {{currentDate | date:'MM/dd/yyyy'}}
+</p>
+
+<p>Current Date with format dd/MM/yyyy:
+    {{currentDate | date:'dd/MM/yyyy'}}
+</p>
+
+<p>Current Date with format yyyy/MM/dd:
+    {{currentDate | date:'yyyy/MM/dd'}}
+</p>
+
+<p>Decimal Pipe</p>
+
+<p>Price: {{price}}</p>
+
+<p>Price with DecimalPipe:
+    {{price | number}}
+</p>
+
+<p>Price with format '1.2-2':
+    {{price | number:'1.2-2'}}
+</p>
+
+<p>Price with format '3.1-1':
+    {{price | number:'3.1-1'}}
+</p>
+
+<p>Price with format '4.0-0':
+    {{price | number:'4.0-0'}}
+</p>
+
+<p>Percent Pipe</p>
+
+<p>Discount: {{discount}}</p>
+
+<p>Discount with PercentPipe:
+    {{discount | percent}}
+</p>
+
+<p>Discount with format '1.2-2':
+    {{discount | percent:'1.2-2'}}
+</p>
+
+<p>Discount with format '3.1-1':
+    {{discount | percent:'3.1-1'}}
+</p>
+
+<p>Discount with format '4.0-0':
+    {{discount | percent:'4.0-0'}}
+</p>
+
+<p>Currency Pipe</p>
+
+<p>Salary: {{salary}}</p>
+
+<p>Salary with CurrencyPipe:
+    {{salary | currency}}
+</p>
+
+<p>Salary with USD:
+    {{salary | currency:'USD'}}
+</p>
+
+<p>Salary with EUR:
+    {{salary | currency:'EUR'}}
+</p>
+
+<p>Salary with INR:
+    {{salary | currency:'INR'}}
+</p>
+
+<p>Salary with CNY:
+    {{salary | currency:'CNY'}}
+</p>
+
+<p>Slice Pipe</p>
+
+<p>Cities: {{cities}}</p>
+
+<p>Cities with SlicePipe (0,5):
+    {{cities | slice:0:5}}
+</p>
+
+<p>Cities with SlicePipe (2,7):
+    {{cities | slice:2:7}}
+</p>
+
+<p>Message is: {{message}}</p>
+
+<p>Message with SlicePipe (0,5):
+    {{message | slice:0:5}}
+</p>
+
+<p>Message with SlicePipe (6,11):
+    {{message | slice:6:11}}
+</p>

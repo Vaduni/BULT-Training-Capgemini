@@ -1,0 +1,23 @@
+.container {
+  border: 1px solid gray;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+input,
+select {
+  padding: 8px;
+  margin: 5px;
+}
+
+.text-danger {
+  color: red;
+  display: block;
+}
+
+.address-form {
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+}

@@ -1,0 +1,147 @@
+<div class="container">
+
+  <h2>Dynamic Form Example</h2>
+
+  @for(item of profileFormGroups; track $index)
+  {
+
+  <form [formGroup]="item">
+
+    <h3>Profile {{ $index + 1 }}</h3>
+
+    <!-- Username -->
+
+    <div>
+
+      <label>Username</label>
+
+      <input
+        type="text"
+        formControlName="username"
+      >
+
+      @if(item.get('username')?.touched &&
+      item.get('username')?.invalid)
+      {
+        <span class="text-danger">
+          Username is required
+        </span>
+      }
+
+    </div>
+
+    <!-- Age -->
+
+    <div>
+
+      <label>Age</label>
+
+      <input
+        type="number"
+        formControlName="age"
+      >
+
+      @if(item.get('age')?.touched &&
+      item.get('age')?.invalid)
+      {
+
+        @if(item.get('age')?.errors?.['required'])
+        {
+          <span class="text-danger">
+            Age is required
+          </span>
+        }
+
+        @if(item.get('age')?.errors?.['min'])
+        {
+          <span class="text-danger">
+            Minimum age is 18
+          </span>
+        }
+
+      }
+
+    </div>
+
+    <!-- City -->
+
+    <div>
+
+      <label>City</label>
+
+      <input
+        type="text"
+        formControlName="city"
+      >
+
+      @if(item.get('city')?.touched &&
+      item.get('city')?.invalid)
+      {
+        <span class="text-danger">
+          City is required
+        </span>
+      }
+
+    </div>
+
+    <!-- Profile -->
+
+    <div>
+
+      <label>Select Profile</label>
+
+      <select formControlName="profile">
+
+        <option value="">
+          Select Profile
+        </option>
+
+        @for(profile of profiles; track $index)
+        {
+          <option [value]="profile">
+            {{profile}}
+          </option>
+        }
+
+      </select>
+
+      @if(item.get('profile')?.touched &&
+      item.get('profile')?.invalid)
+      {
+        <span class="text-danger">
+          Profile is required
+        </span>
+      }
+
+    </div>
+
+    <button
+      type="button"
+      (click)="removeProfile($index)"
+    >
+      Remove Profile
+    </button>
+
+  </form>
+
+  }
+
+  <div>
+
+    <button
+      type="button"
+      (click)="addProfile()"
+    >
+      Add Profile
+    </button>
+
+    <button
+      type="button"
+      (click)="submitProfiles()"
+    >
+      Submit Profiles
+    </button>
+
+  </div>
+
+</div>

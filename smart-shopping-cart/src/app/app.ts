@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart';
 import { Product, CheckoutData } from './models/models';
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ShoppingCartComponent,CustomerProfileComponent],
+  imports: [CommonModule, ShoppingCartComponent,CustomerProfileComponent, RouterOutlet, NavbarComponent],
 
   templateUrl: './app.html',
   styleUrls: ['./app.css']

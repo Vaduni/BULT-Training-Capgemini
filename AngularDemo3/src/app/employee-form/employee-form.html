@@ -1,0 +1,243 @@
+<div class="container">
+
+  <h2>Employee Form using FormGroup</h2>
+
+  <form
+    [formGroup]="employeeForm"
+    (ngSubmit)="submitForm()"
+  >
+
+    <p>
+      <label>Name</label>
+
+      <input
+        type="text"
+        formControlName="name"
+      >
+
+      @if(employeeForm.get('name')?.touched &&
+      employeeForm.get('name')?.invalid)
+      {
+        @if(employeeForm.get('name')?.errors?.['required'])
+        {
+          <span class="text-danger">
+            Name is required
+          </span>
+        }
+
+        @if(employeeForm.get('name')?.errors?.['minlength'])
+        {
+          <span class="text-danger">
+            Minimum 3 characters required
+          </span>
+        }
+      }
+    </p>
+
+    <p>
+      <label>Email</label>
+
+      <input
+        type="email"
+        formControlName="email"
+      >
+
+      @if(employeeForm.get('email')?.touched &&
+      employeeForm.get('email')?.invalid)
+      {
+        @if(employeeForm.get('email')?.errors?.['required'])
+        {
+          <span class="text-danger">
+            Email is required
+          </span>
+        }
+
+        @if(employeeForm.get('email')?.errors?.['email'])
+        {
+          <span class="text-danger">
+            Invalid Email
+          </span>
+        }
+      }
+    </p>
+
+    <p>
+      <label>Department</label>
+
+      <input
+        type="text"
+        formControlName="department"
+      >
+    </p>
+
+    <p>
+      <label>City</label>
+
+      <select formControlName="city">
+
+        @for(city of cities; track $index)
+        {
+          <option [value]="city">
+            {{city}}
+          </option>
+        }
+
+      </select>
+    </p>
+
+    <p>
+
+      <label>Gender</label>
+
+      <input
+        type="radio"
+        value="Male"
+        formControlName="gender"
+      >
+      Male
+
+      <input
+        type="radio"
+        value="Female"
+        formControlName="gender"
+      >
+      Female
+
+    </p>
+
+    <button type="submit">
+      Submit
+    </button>
+
+  </form>
+
+</div>
+
+<hr>
+
+<div class="container">
+
+  <h2>Nested Form Group</h2>
+
+  <form
+    [formGroup]="employeeForm2"
+    (ngSubmit)="submitForm2()"
+  >
+
+    <input
+      type="text"
+      formControlName="name"
+    >
+
+    <input
+      type="email"
+      formControlName="email"
+    >
+
+    <div formGroupName="address">
+
+      <input
+        type="text"
+        formControlName="street"
+        placeholder="Street"
+      >
+
+      <input
+        type="text"
+        formControlName="city"
+        placeholder="City"
+      >
+
+      <input
+        type="text"
+        formControlName="state"
+        placeholder="State"
+      >
+
+      <input
+        type="text"
+        formControlName="zip"
+        placeholder="Zip"
+      >
+
+    </div>
+
+    <button type="submit">
+      Submit
+    </button>
+
+  </form>
+
+</div>
+
+<hr>
+
+<div class="container">
+
+  <h2>FormBuilder Example</h2>
+
+  <form
+    [formGroup]="employeeForm3"
+    (ngSubmit)="submitForm3()"
+  >
+
+    <p>
+
+      <label>Name</label>
+
+      <input
+        type="text"
+        formControlName="name"
+      >
+
+      @if(employeeForm3.get('name')?.touched &&
+      employeeForm3.get('name')?.invalid)
+      {
+
+        @if(employeeForm3.get('name')?.errors?.['required'])
+        {
+          <span class="text-danger">
+            Name is required
+          </span>
+        }
+
+        @if(employeeForm3.get('name')?.errors?.['nameStartsWithJ'])
+        {
+          <span class="text-danger">
+            Name must start with J
+          </span>
+        }
+
+      }
+
+    </p>
+
+    <p>
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        formControlName="email"
+      >
+
+    </p>
+
+    <p>
+
+      <label>Department</label>
+
+      <input
+        type="text"
+        formControlName="department"
+      >
+
+    </p>
+
+    <button type="submit">
+      Submit
+    </button>
+
+  </form>
+
+</div>
